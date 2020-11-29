@@ -8,13 +8,28 @@ class DB(object):
     def execute(self, consulta):
         cursor = self.sqliteConnection.cursor()
         cursor.execute(consulta)
+
+        rows = []
+        if cursor.rowcount != 0:
+            rows = cursor.fetchall()
         cursor.close()
+        return rows
 
     def create(self, nombre_tabla, fields):
         query = '''CREATE TABLE ''' + nombre_tabla + '''(''' + fields + ''');'''
-        print(query)
         self.execute(query)
 
     def select(self, nombre_tabla, campos):
         query = '''SELECT ''' + campos + ''' FROM ''' + nombre_tabla + ''';'''
         self.execute(query)
+
+    def insert(self, nombre_tabla, ecuacion):
+        lista_columnas = ', '.join(map(str, ecuacion.keys()))
+        lista_valores = ', '.join(map(str, ecuacion.values()))
+        query = '''INSERT INTO ''' + nombre_tabla + ''' (''' + lista_columnas + ''') VALUES (''' + lista_valores + ''');'''
+        self.execute(query)
+        self.sqliteConnection.commit()
+
+    def select_por_id(self, nombre_tabla, nombre_campo, valor_campo):
+        query = '''SELECT * FROM ''' + nombre_tabla + ''' WHERE ''' + nombre_campo + ''' = ''' + valor_campo + ''';'''
+        return self.execute(query)
