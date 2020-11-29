@@ -1,3 +1,5 @@
+from numpy import sqrt
+
 from model.db import DB
 from model.ecuacion import Ecuacion
 
@@ -36,7 +38,7 @@ class Cuadratica(Ecuacion):
         db = DB('demo')
         ecuacion = db.select_por_id('ecuacion_segundo_grado', 'id', str(identificador))
         self.coeficiente_a = ecuacion[0][0]
-        self.coeficiente_b= ecuacion[0][1]
+        self.coeficiente_b = ecuacion[0][1]
         self.coeficiente_c = ecuacion[0][2]
 
     def imprimir(self):
@@ -51,7 +53,13 @@ class Cuadratica(Ecuacion):
         return ecuacion
 
     def resolver(self):
-        self.solucion = -self.termino_independiente / self.coeficiente
+        discriminante = self.coeficiente_b ** 2 - 4 * self.coeficiente_a * self.coeficiente_c
+        if discriminante > 0:
+            self.solucion_1 = (-self.coeficiente_b + sqrt(discriminante)) / 2 * self.coeficiente_a
+            self.solucion_2 = (-self.coeficiente_b - sqrt(discriminante)) / 2 * self.coeficiente_a
+        else:
+            self.solucion_1 = complex(-self.coeficiente_b/(2*self.coeficiente_a), sqrt(-discriminante)/(2*self.coeficiente_a))
+            self.solucion_2 = complex(-self.coeficiente_b/(2*self.coeficiente_a), -sqrt(-discriminante)/(2*self.coeficiente_a))
 
     def obtener_solucion(self):
-        return self.solucion
+        return [self.solucion_1, self.solucion_2]
