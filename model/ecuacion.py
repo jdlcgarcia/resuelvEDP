@@ -5,6 +5,7 @@ class Ecuacion(object):
     def __init__(self):
         self.coeficiente = 0
         self.termino_independiente = 0
+        self.solucion = 0
 
     def pedir_datos(self):
         while True:
@@ -39,3 +40,9 @@ class Ecuacion(object):
         ecuacion += str(self.termino_independiente)
         ecuacion += " = 0"
         return ecuacion
+
+    def resolver(self):
+        self.solucion = -self.termino_independiente / self.coeficiente
+
+    def obtener_solucion(self):
+        return self.solucion
