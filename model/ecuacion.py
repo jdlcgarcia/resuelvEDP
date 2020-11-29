@@ -1,8 +1,12 @@
+from model.db import DB
+
+
 class Ecuacion(object):
     def __init__(self):
         self.coeficiente = 0
         self.termino_independiente = 0
 
+    def pedir_datos(self):
         while True:
 
             try:
@@ -18,6 +22,15 @@ class Ecuacion(object):
                 break
             except ValueError:
                 print("Error! El término introducido no es un número. Por favor, inténtelo de nuevo.")
+
+        db = DB('demo')
+        db.insert('ecuacion', {'coeficiente': self.coeficiente, 'termino_independiente': self.termino_independiente})
+
+    def cargar(self, identificador):
+        db = DB('demo')
+        ecuacion = db.select_por_id('ecuacion', 'id', str(identificador))
+        self.coeficiente = ecuacion[0][0]
+        self.termino_independiente = ecuacion[0][1]
 
     def imprimir(self):
         ecuacion = str(self.coeficiente) + "x "
