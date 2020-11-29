@@ -11,7 +11,7 @@ class Ecuacion(object):
         while True:
 
             try:
-                self.coeficiente = int(input("Por favor, introduce el coeficiente: "))
+                self.coeficiente = int(input("Por favor, introduce el coeficiente de x: "))
                 break
             except ValueError:
                 print("Error! El coeficiente introducido no es un número. Por favor, inténtelo de nuevo.")
