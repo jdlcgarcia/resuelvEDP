@@ -55,11 +55,13 @@ class Cuadratica(Ecuacion):
     def resolver(self):
         discriminante = self.coeficiente_b ** 2 - 4 * self.coeficiente_a * self.coeficiente_c
         if discriminante > 0:
-            self.solucion_1 = (-self.coeficiente_b + sqrt(discriminante)) / 2 * self.coeficiente_a
-            self.solucion_2 = (-self.coeficiente_b - sqrt(discriminante)) / 2 * self.coeficiente_a
+            self.solucion_1 = (-self.coeficiente_b + sqrt(discriminante)) / (2 * self.coeficiente_a)
+            self.solucion_2 = (-self.coeficiente_b - sqrt(discriminante)) / (2 * self.coeficiente_a)
         else:
-            self.solucion_1 = complex(-self.coeficiente_b/(2*self.coeficiente_a), sqrt(-discriminante)/(2*self.coeficiente_a))
-            self.solucion_2 = complex(-self.coeficiente_b/(2*self.coeficiente_a), -sqrt(-discriminante)/(2*self.coeficiente_a))
+            self.solucion_1 = complex(-self.coeficiente_b / (2 * self.coeficiente_a),
+                                      sqrt(-discriminante) / (2 * self.coeficiente_a))
+            self.solucion_2 = complex(-self.coeficiente_b / (2 * self.coeficiente_a),
+                                      -sqrt(-discriminante) / (2 * self.coeficiente_a))
 
     def obtener_solucion(self):
         return [self.solucion_1, self.solucion_2]
