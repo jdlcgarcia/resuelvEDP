@@ -30,8 +30,8 @@ class Ecuacion(object):
     def cargar(self, identificador):
         db = DB('demo')
         ecuacion = db.select_por_id('ecuacion', 'id', str(identificador))
-        self.coeficiente = ecuacion[0][0]
-        self.termino_independiente = ecuacion[0][1]
+        self.coeficiente = ecuacion[0][1]
+        self.termino_independiente = ecuacion[0][2]
 
     def imprimir(self):
         ecuacion = str(self.coeficiente) + "x "
