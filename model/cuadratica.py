@@ -37,9 +37,9 @@ class Cuadratica(Ecuacion):
     def cargar(self, identificador):
         db = DB('demo')
         ecuacion = db.select_por_id('ecuacion_segundo_grado', 'id', str(identificador))
-        self.coeficiente_a = ecuacion[0][0]
-        self.coeficiente_b = ecuacion[0][1]
-        self.coeficiente_c = ecuacion[0][2]
+        self.coeficiente_a = ecuacion[0][1]
+        self.coeficiente_b = ecuacion[0][2]
+        self.coeficiente_c = ecuacion[0][3]
 
     def imprimir(self):
         ecuacion = str(self.coeficiente_a) + "x^2 "
