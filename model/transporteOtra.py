@@ -93,6 +93,10 @@ class TransporteOtra:
     def cargar(self, identificador):
         db = DB('demo')
         ecuacion = db.select_por_id('edp_transporte', 'id', str(identificador))
+        if not ecuacion:
+            print("Ecuación no encontrada")
+            return false
+
         self.a = ecuacion[0][1]
         self.b = ecuacion[0][2]
         self.c = ecuacion[0][3]
@@ -107,5 +111,5 @@ class TransporteOtra:
         self.condicion_inicial_x = ecuacion[0][10]
         self.condicion_inicial_t = ecuacion[0][11]
         self.inicializar_estructura()
-
+        return true
 
