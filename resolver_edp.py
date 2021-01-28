@@ -1,6 +1,6 @@
-from model.transporteOtra import TransporteOtra
+from model.transporte import transporte
 
-ecuacion = TransporteOtra()
+ecuacion = transporte()
 while True:
 
     try:
