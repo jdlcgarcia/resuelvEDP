@@ -15,8 +15,8 @@ class transporte_progresiva_regresiva:
         self.primera_vertical(expr_t, t, x)
         # cálculo del caso general
         for j in range(1, self.ecuacion.n+1):
-            for i in range(self.ecuacion.m-1, -1, -1):
-                self.ecuacion.matriz[i, j] = self.ecuacion.r * (self.ecuacion.matriz[i+1, j-1] - self.ecuacion.matriz[i, j-1])+self.ecuacion.matriz[i, j-1]
+            for i in range(self.ecuacion.m+1):
+                self.ecuacion.matriz[i, j] = self.ecuacion.r * (self.ecuacion.matriz[i, j+1] - self.ecuacion.matriz[i-1, j-1])+self.ecuacion.matriz[i-1, j-1]
 
     def primera_vertical(self, expr_t, t, x):
         for j in range(1, self.ecuacion.n + 1):
