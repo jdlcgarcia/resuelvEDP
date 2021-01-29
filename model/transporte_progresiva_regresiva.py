@@ -25,6 +25,6 @@ class transporte_progresiva_regresiva:
 
     def primera_horizontal(self, expr_x, t, x):
         for i in range(self.ecuacion.m + 1):
-            self.ecuacion.matriz[i, 0] = expr_x.evalf(subs={x: self.ecuacion.valor_x(i), t: self.ecuacion.valor_t(0)})
+            self.ecuacion.matriz[i, self.ecuacion.n] = expr_x.evalf(subs={x: self.ecuacion.valor_x(i), t: self.ecuacion.valor_t(0)})
 
 
