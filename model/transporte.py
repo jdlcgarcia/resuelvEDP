@@ -59,21 +59,6 @@ class transporte:
                 print(self.matriz[i, j], end=' ')
             print('')
 
-    def evaluar(self):
-        x, t = symbols('x, t')
-        expr_x = sympify(self.condicion_inicial_x)
-        expr_t = sympify(self.condicion_inicial_t)
-        # cálculo de la primera condición inicial
-        for i in range(self.m+1):
-            self.matriz[i, 0] = expr_x.evalf(subs={x: self.valor_x(i), t:self.valor_t(0)})
-        # cálculo de la segunda condición inicial sin 4,0
-        for j in range(1, self.n+1):
-             self.matriz[self.m, j] = expr_t.evalf(subs={x: self.valor_x(self.m), t: self.valor_t(j)})
-        # cálculo del caso general
-        for j in range(1, self.n+1):
-            for i in range(self.m-1, -1, -1):
-                self.matriz[i, j] = self.r * (self.matriz[i+1, j-1] - self.matriz[i, j-1])+self.matriz[i, j-1]
-
     def print_coord(self, i, j):
         print(i, end=',')
         print(j)
