@@ -4,7 +4,7 @@ import numpy as np
 from model.db import DB
 
 
-class transporte:
+class Transporte:
     def __init__(self):
         self.id = None
         self.a = 0
@@ -73,7 +73,7 @@ class transporte:
         print(i, end=',')
         print(j)
 
-    def imprimirPuntosSolucion(self):
+    def imprimir_puntos_solucion(self):
         for j in range(self.n + 1):
             for i in range(self.m+1):
                 self.print_solucion(i, j)

@@ -1,5 +1,5 @@
-from model.transporte import transporte
+from model.transporte import Transporte
 
-ecuacion = transporte()
+ecuacion = Transporte()
 ecuacion.pedir_datos()
 print("La ecuación #" + str(ecuacion.get_id()) + " ha sido guardada en base de datos")

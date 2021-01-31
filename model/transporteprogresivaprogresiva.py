@@ -1,7 +1,7 @@
 from sympy import *
 
 
-class transporte_progresiva_progresiva:
+class TransporteProgresivaProgresiva:
     def __init__(self, edp):
         self.ecuacion = edp
 
