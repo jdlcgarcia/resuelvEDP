@@ -1,7 +1,7 @@
 from sympy import *
 import numpy as np
 
-from model.db import DB
+from model.DB import DB
 
 
 class Transporte:

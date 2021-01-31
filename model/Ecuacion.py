@@ -1,4 +1,4 @@
-from model.db import DB
+from model.DB import DB
 
 
 class Ecuacion(object):

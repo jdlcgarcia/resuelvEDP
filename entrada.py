@@ -1,4 +1,4 @@
-from model.ecuacion import Ecuacion
+from model.Ecuacion import Ecuacion
 
 ecuacion = Ecuacion()
 ecuacion.cargar(2)

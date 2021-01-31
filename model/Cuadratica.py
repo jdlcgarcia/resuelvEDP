@@ -1,7 +1,7 @@
 from numpy import sqrt
 
-from model.db import DB
-from model.ecuacion import Ecuacion
+from model.DB import DB
+from model.Ecuacion import Ecuacion
 
 
 class Cuadratica(Ecuacion):

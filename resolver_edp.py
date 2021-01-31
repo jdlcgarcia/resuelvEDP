@@ -1,5 +1,5 @@
-from model.factoriatransporte import FactoriaTransporte
-from model.transporte import Transporte
+from model.FactoriaTransporte import FactoriaTransporte
+from model.Transporte import Transporte
 
 ecuacion = Transporte()
 while True:

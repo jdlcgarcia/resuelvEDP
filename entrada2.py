@@ -1,4 +1,4 @@
-from model.cuadratica import Cuadratica
+from model.Cuadratica import Cuadratica
 
 ecuacion = Cuadratica()
 ecuacion.pedir_datos()

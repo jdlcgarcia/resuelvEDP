@@ -1,4 +1,4 @@
-from model.db import DB
+from model.DB import DB
 
 db = DB('demo')
 db.create('ecuacion', '''id INTEGER PRIMARY KEY,

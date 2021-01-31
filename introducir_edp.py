@@ -1,4 +1,4 @@
-from model.transporte import Transporte
+from model.Transporte import Transporte
 
 ecuacion = Transporte()
 ecuacion.pedir_datos()
