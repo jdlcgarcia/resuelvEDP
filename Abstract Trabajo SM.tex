@@ -19,6 +19,7 @@
 \usepackage{enumerate} % para listas
 \usepackage{amsmath}   % para alinear ecuaciones
 \usepackage{float}
+\usepackage{hyperref}
 
 \setcounter{secnumdepth}{1}
 
@@ -134,9 +135,10 @@ Así pues, realizaremos discretizaciones uniformes (tamaños de paso fijos) en t
 El \textbf{programa} realizado tiene dos módulos:
 \begin{itemize}
 	\item \textbf{Módulo de entrada/salida}: utilizamos la instrucción input y la conversión de tipos de datos para validar los que van a entrar en base de datos. La base de datos es \textit{SQLite}, y hemos creado un módulo para incluir de forma abstracta cualquier tipo de datos en cualquier tabla, siempre y cuando estén validados.
-	\item \textbf{Módulo de cálculo}: creamos clases generales de ecuación y clases específicas para cada tipo de ecuación, y usando el patrón de diseño factoría apuntamos al esquema concreto de ecuación del transporte usando como discriminante la progresión o regresión en tiempo y espacio. En un principio lo diseñamos con herencia, pero decidimos separarlo en clases independientes para favorecer la independencia de responsabilidades en cada clase, pero hemos dejado incluido un ejemplo de herencia con clases de ecuación lineal y de segundo grado por cuestiones didácticas.
+	\item \textbf{Módulo de cálculo}: creamos clases generales de ecuación y clases específicas para cada tipo de ecuación, y usando el patrón de diseño factoría apuntamos al esquema concreto de ecuación del transporte usando como discriminante la progresión o regresión en tiempo y espacio. En un principio lo diseñamos con herencia de clases, pero decidimos separarlo en clases independientes para favorecer la independencia de responsabilidades en cada clase. No obstante, hemos dejado incluido un ejemplo de herencia con clases de ecuación lineal y de segundo grado por cuestiones didácticas.
 \end{itemize}
 
+Hemos utilizado ciertas librerías vistas en clase, como \textbf{numpy}, \textbf{simpy} y \textbf{matplotlib}. Hemos utilizado control de versiones con GitHub, y el proyecto será abierto al público una vez se venza el plazo de entrega de trabajos, estará accesible en \href{https://github.com/jdlcgarcia/resuelvEDP}{ResuelvEDP}.
 
 \section*{Instalación}
 

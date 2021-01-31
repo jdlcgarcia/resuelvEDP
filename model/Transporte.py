@@ -4,7 +4,6 @@ import numpy as np
 from model.DB import DB
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
 
 
 class Transporte:
