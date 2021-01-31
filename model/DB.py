@@ -7,6 +7,7 @@ class DB(object):
 
     def execute(self, consulta, tipo_consulta):
         cursor = self.sqliteConnection.cursor()
+        print(consulta)
         cursor.execute(consulta)
 
         rows = []
@@ -38,3 +39,15 @@ class DB(object):
     def select_por_id(self, nombre_tabla, nombre_campo, valor_campo):
         query = '''SELECT * FROM ''' + nombre_tabla + ''' WHERE ''' + nombre_campo + ''' = ''' + valor_campo + ''';'''
         return self.execute(query, 'select')
+
+    def update_por_id(self, nombre_tabla, campos, nombre_id, valor_id):
+        query = ''' UPDATE ''' + nombre_tabla
+        query += ''' SET '''
+        lista_update = []
+        for k, v in campos.items():
+            lista_update.append(k + ''' = ''' + "'" + v + "'")
+        query += ','.join(lista_update)
+        query += ''' WHERE ''' + nombre_id + ''' = ''' + str(valor_id) + ''';'''
+
+        self.execute(query, 'update')
+        self.sqliteConnection.commit()

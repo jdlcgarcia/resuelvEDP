@@ -18,4 +18,4 @@ if ecuacion.cargar(id_ecuacion):
     print("Su mallado es:\n")
     print(ecuacion.imprimir_matriz())
     print("Los puntos solución son:\n")
-    print(ecuacion.imprimir_puntos_solucion())
+    print(ecuacion.extraer_puntos_solucion())

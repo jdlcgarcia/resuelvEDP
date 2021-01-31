@@ -17,6 +17,7 @@ class TransporteRegresivaProgresiva:
         for j in range(1, self.ecuacion.n+1):
             for i in range(self.ecuacion.m-1, -1, -1):
                 self.ecuacion.matriz[i, j] = self.ecuacion.r * (self.ecuacion.matriz[i+1, j-1] - self.ecuacion.matriz[i, j-1])+self.ecuacion.matriz[i, j-1]
+        self.ecuacion.guardar_solucion()
 
     def primera_vertical(self, expr_t, t, x):
         for j in range(1, self.ecuacion.n + 1):

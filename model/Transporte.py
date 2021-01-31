@@ -73,17 +73,19 @@ class Transporte:
         print(i, end=',')
         print(j)
 
-    def imprimir_puntos_solucion(self):
+    def extraer_puntos_solucion(self):
+        solucion = []
         for j in range(self.n + 1):
             for i in range(self.m+1):
-                self.print_solucion(i, j)
-        return ""
+                solucion.append(self.punto_solucion_por_coordenada(i, j))
+        return ','.join(solucion)
 
-    def print_solucion(self, i, j):
-        print("{", end='')
-        print(self.valor_x(i), end=', ')
-        print(self.valor_t(j), end=', ')
-        print(self.matriz[i, j], end='},')
+    def punto_solucion_por_coordenada(self, i, j):
+        punto_solucion = '{'
+        punto_solucion += str(self.valor_x(i)) + ', '
+        punto_solucion += str(self.valor_t(j)) + ', '
+        punto_solucion += str(self.matriz[i, j]) + '}'
+        return punto_solucion
 
     def cargar(self, identificador):
         db = DB('demo')
@@ -92,6 +94,7 @@ class Transporte:
             print("Ecuación no encontrada")
             return false
 
+        self.id = identificador
         self.a = ecuacion[0][1]
         self.b = ecuacion[0][2]
         self.c = ecuacion[0][3]
@@ -198,3 +201,8 @@ class Transporte:
             'condicion_inicial_x': '"' + self.condicion_inicial_x + '"',
             'condicion_inicial_t': '"' + self.condicion_inicial_t + '"',
         })
+
+    def guardar_solucion(self):
+        db = DB('demo')
+        campos = {'puntos_solucion': self.extraer_puntos_solucion()}
+        db.update_por_id('edp_transporte', campos, 'id', self.id)
