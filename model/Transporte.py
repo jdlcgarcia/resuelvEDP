@@ -1,8 +1,8 @@
+from mpl_toolkits.mplot3d import Axes3D
 from sympy import *
 import numpy as np
-
 from model.DB import DB
-
+import matplotlib.pyplot as plt
 
 class Transporte:
     def __init__(self):
@@ -77,14 +77,15 @@ class Transporte:
         solucion = []
         for j in range(self.n + 1):
             for i in range(self.m+1):
-                solucion.append(self.punto_solucion_por_coordenada(i, j))
-        return ','.join(solucion)
+                coordenada = self.punto_solucion_por_coordenada(i, j)
+                solucion.append(coordenada)
+        return solucion
 
     def punto_solucion_por_coordenada(self, i, j):
-        punto_solucion = '{'
-        punto_solucion += str(self.valor_x(i)) + ', '
-        punto_solucion += str(self.valor_t(j)) + ', '
-        punto_solucion += str(self.matriz[i, j]) + '}'
+        punto_solucion = {}
+        punto_solucion.update({"x": self.valor_x(i)})
+        punto_solucion.update({"t": self.valor_t(j)})
+        punto_solucion.update({"solucion": self.matriz[i, j]})
         return punto_solucion
 
     def cargar(self, identificador):
@@ -204,5 +205,28 @@ class Transporte:
 
     def guardar_solucion(self):
         db = DB('demo')
-        campos = {'puntos_solucion': self.extraer_puntos_solucion()}
+        campos = {'puntos_solucion': self.aplanar_solucion()}
         db.update_por_id('edp_transporte', campos, 'id', self.id)
+        self.pintar_grafico()
+
+    def aplanar_solucion(self):
+        solucion = self.extraer_puntos_solucion()
+        aplanada = []
+        for i in solucion:
+            aplanada.append('{' + str(i['x']) + ', ' + str(i['t']) + ', ' + str(i['solucion']) + '}')
+        return ','.join(aplanada)
+
+    def pintar_grafico(self):
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        solucion = self.extraer_puntos_solucion()
+        x = []
+        y = []
+        z = []
+        for i in solucion:
+            x.append(i['x'])
+            y.append(i['t'])
+            z.append(i['solucion'])
+
+        ax.plot(x, y, z)
+        plt.show()

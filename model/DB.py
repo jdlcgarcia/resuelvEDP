@@ -7,7 +7,6 @@ class DB(object):
 
     def execute(self, consulta, tipo_consulta):
         cursor = self.sqliteConnection.cursor()
-        print(consulta)
         cursor.execute(consulta)
 
         rows = []
