@@ -19,20 +19,22 @@ class DB(object):
 
     def create(self, nombre_tabla, fields):
         query = '''CREATE TABLE ''' + nombre_tabla + '''(''' + fields + ''');'''
-        self.execute(query)
+        self.execute(query, 'create')
 
     def select(self, nombre_tabla, campos):
         query = '''SELECT ''' + campos + ''' FROM ''' + nombre_tabla + ''';'''
-        self.execute(query)
+        self.execute(query, 'select')
 
     def insert(self, nombre_tabla, ecuacion):
         lista_columnas = ', '.join(map(str, ecuacion.keys()))
         lista_valores = ', '.join(map(str, ecuacion.values()))
-        query = '''INSERT INTO ''' + nombre_tabla + ''' (''' + lista_columnas + ''') VALUES (''' + lista_valores + ''');'''
+        query = '''INSERT INTO ''' + nombre_tabla
+        query += ''' (''' + lista_columnas + ''')'''
+        query += ''' VALUES (''' + lista_valores + ''');'''
         nuevo_id = self.execute(query, 'insert')
         self.sqliteConnection.commit()
         return nuevo_id
 
     def select_por_id(self, nombre_tabla, nombre_campo, valor_campo):
         query = '''SELECT * FROM ''' + nombre_tabla + ''' WHERE ''' + nombre_campo + ''' = ''' + valor_campo + ''';'''
-        return self.execute(query)
+        return self.execute(query, 'select')

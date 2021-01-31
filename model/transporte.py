@@ -6,7 +6,7 @@ from model.db import DB
 
 class transporte:
     def __init__(self):
-        self.id = 0
+        self.id = None
         self.a = 0
         self.b = 0
         self.c = 0
@@ -16,9 +16,14 @@ class transporte:
         self.n = 0
         self.p = 0
 
+        self.h = None
+        self.k = None
+        self.r = None
+        self.matriz = None
+
         self.progresion = {
-            'tiempo': 1,
-            'espacio': 1
+            'tiempo': 0,
+            'espacio': 0
         }
         self.condicion_inicial_x = ""
         self.condicion_inicial_t = ""
@@ -63,7 +68,8 @@ class transporte:
                 print(self.matriz[i, j], end=' ')
             print('')
 
-    def print_coord(self, i, j):
+    @staticmethod
+    def print_coord(i, j):
         print(i, end=',')
         print(j)
 
@@ -152,13 +158,17 @@ class transporte:
                 print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.tiempo = int(input("Por favor, introduzca el esquema en el tiempo: (1) progresivo, (0) regresivo: "))
+                self.progresion['tiempo'] = int(
+                    input("Por favor, introduzca el esquema en el tiempo: (1) progresivo, (0) regresivo: ")
+                )
                 break
             except ValueError:
                 print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.espacio = int(input("Por favor, introduzca el esquema en el espacio: (1) progresivo, (0) regresivo: "))
+                self.progresion['espacio'] = int(
+                    input("Por favor, introduzca el esquema en el espacio: (1) progresivo, (0) regresivo: ")
+                )
                 break
             except ValueError:
                 print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
@@ -183,8 +193,8 @@ class transporte:
             'm': self.m,
             'n': self.n,
             'p': self.p,
-            'progresion_tiempo': self.tiempo,
-            'progresion_espacio': self.espacio,
+            'progresion_tiempo': self.progresion['tiempo'],
+            'progresion_espacio': self.progresion['espacio'],
             'condicion_inicial_x': '"' + self.condicion_inicial_x + '"',
             'condicion_inicial_t': '"' + self.condicion_inicial_t + '"',
         })

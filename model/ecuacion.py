@@ -29,7 +29,10 @@ class Ecuacion(object):
                 print("Error! El término introducido no es un número. Por favor, inténtelo de nuevo.")
 
         db = DB('demo')
-        self.id = db.insert('ecuacion', {'coeficiente': self.coeficiente, 'termino_independiente': self.termino_independiente})
+        self.id = db.insert('ecuacion', {
+            'coeficiente': self.coeficiente,
+            'termino_independiente': self.termino_independiente
+        })
 
     def cargar(self, identificador):
         db = DB('demo')
