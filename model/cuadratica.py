@@ -32,7 +32,7 @@ class Cuadratica(Ecuacion):
             'coeficiente_b': self.coeficiente_b,
             'coeficiente_c': self.coeficiente_c,
         }
-        db.insert('ecuacion_segundo_grado', coeficientes)
+        self.id = db.insert('ecuacion_segundo_grado', coeficientes)
 
     def cargar(self, identificador):
         db = DB('demo')

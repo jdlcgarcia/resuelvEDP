@@ -6,6 +6,7 @@ from model.db import DB
 
 class transporte:
     def __init__(self):
+        self.id = 0
         self.a = 0
         self.b = 0
         self.c = 0
@@ -21,6 +22,9 @@ class transporte:
         }
         self.condicion_inicial_x = ""
         self.condicion_inicial_t = ""
+
+    def get_id(self):
+        return self.id
 
     def inicializar_estructura(self):
         self.h = (self.b - self.a) / self.m
@@ -101,77 +105,77 @@ class transporte:
     def pedir_datos(self):
         while True:
             try:
-                self.a = int(input("Por favor, a: "))
+                self.a = int(input("Por favor, introduzca el primer componente del intervalo de x: "))
                 break
             except ValueError:
-                print("Error! El a introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
 
         while True:
             try:
-                self.b = int(input("Por favor, b: "))
+                self.b = int(input("Por favor, introduzca el segundo componente del intervalo de x: "))
                 break
             except ValueError:
-                print("Error! El b introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
 
         while True:
             try:
-                self.c = int(input("Por favor, c: "))
+                self.c = int(input("Por favor, introduzca el primer componente del intervalo de t: "))
                 break
             except ValueError:
-                print("Error! El c introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
 
         while True:
             try:
-                self.d = int(input("Por favor, d: "))
+                self.d = int(input("Por favor, introduzca el segundo componente del intervalo de t: "))
                 break
             except ValueError:
-                print("Error! El d introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
 
         while True:
             try:
-                self.m = int(input("Por favor, m: "))
+                self.m = int(input("Por favor, introduzca el número de nodos que se desean en el eje x: "))
                 break
             except ValueError:
-                print("Error! El m introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
 
         while True:
             try:
-                self.n = int(input("Por favor, n: "))
+                self.n = int(input("Por favor, introduzca el número de nodos que se desean en el eje y: "))
                 break
             except ValueError:
-                print("Error! El n introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.p = float(input("Por favor, p: "))
+                self.p = float(input("Por favor, introduzca el coeficiente de Ux: "))
                 break
             except ValueError:
-                print("Error! El p introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.tiempo = int(input("Por favor, tiempo: "))
+                self.tiempo = int(input("Por favor, introduzca el esquema en el tiempo: (1) progresivo, (0) regresivo: "))
                 break
             except ValueError:
-                print("Error! El tiempo introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.espacio = int(input("Por favor, espacio: "))
+                self.espacio = int(input("Por favor, introduzca el esquema en el espacio: (1) progresivo, (0) regresivo: "))
                 break
             except ValueError:
-                print("Error! El espacio introducido no es un número. Por favor, inténtelo de nuevo.")
+                print("Error! El dato introducido no es un número. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.condicion_inicial_x = input("Por favor, condicion inicial x: ")
+                self.condicion_inicial_x = input("Por favor, introduzca la condición inicial en x: ")
                 break
             except ValueError:
-                print("Error! la condicion inicial X no es válida. Por favor, inténtelo de nuevo.")
+                print("Error! la condicion inicial en x no es válida. Por favor, inténtelo de nuevo.")
         while True:
             try:
-                self.condicion_inicial_t = input("Por favor, condicion inicial t: ")
+                self.condicion_inicial_t = input("Por favor, introduzca la condicion inicial en t: ")
                 break
             except ValueError:
-                print("Error! la condicion inicial t no es válida. Por favor, inténtelo de nuevo.")
+                print("Error! la condicion inicial en t no es válida. Por favor, inténtelo de nuevo.")
         db = DB('demo')
-        db.insert('edp_transporte', {
+        self.id = db.insert('edp_transporte', {
             'a': self.a,
             'b': self.b,
             'c': self.c,
@@ -181,6 +185,6 @@ class transporte:
             'p': self.p,
             'progresion_tiempo': self.tiempo,
             'progresion_espacio': self.espacio,
-            'condicion_inicial_x': self.condicion_inicial_x,
-            'condicion_inicial_t': self.condicion_inicial_t,
+            'condicion_inicial_x': '"' + self.condicion_inicial_x + '"',
+            'condicion_inicial_t': '"' + self.condicion_inicial_t + '"',
         })

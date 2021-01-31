@@ -3,9 +3,13 @@ from model.db import DB
 
 class Ecuacion(object):
     def __init__(self):
+        self.id = 0
         self.coeficiente = 0
         self.termino_independiente = 0
         self.solucion = 0
+
+    def get_id(self):
+        return self.id
 
     def pedir_datos(self):
         while True:
@@ -25,7 +29,7 @@ class Ecuacion(object):
                 print("Error! El término introducido no es un número. Por favor, inténtelo de nuevo.")
 
         db = DB('demo')
-        db.insert('ecuacion', {'coeficiente': self.coeficiente, 'termino_independiente': self.termino_independiente})
+        self.id = db.insert('ecuacion', {'coeficiente': self.coeficiente, 'termino_independiente': self.termino_independiente})
 
     def cargar(self, identificador):
         db = DB('demo')
