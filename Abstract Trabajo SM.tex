@@ -1,0 +1,179 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+	\posttitle{%
+		\par\end{center}
+	\begin{center}\large#1\end{center}
+	\vskip0.5em}%
+}
+\usepackage{color}
+\usepackage{soul}
+\usepackage{vmargin}
+\usepackage{amsmath}   % para boxed{}, encuadrar expresiones
+\usepackage{amssymb}   % para el conjunto de los números reales
+\usepackage{graphicx}  % para tablas, \resizebox{16cm}{!}
+\usepackage{enumerate} % para listas
+\usepackage{amsmath}   % para alinear ecuaciones
+\usepackage{float}
+
+\setcounter{secnumdepth}{1}
+
+\begin{document}
+
+\title{\textbf{\textit{Software en Matemáticas}: \\ Indicaciones sobre el Trabajo Final}}
+\author{García García, Juan de la Cruz \\ Moreno Romero, Juan Narciso}
+\subtitle{\fbox{MÁSTER INTERUNIVERSITARIO EN MATEMÁTICAS}}
+\date{\textit{31 de enero de 2021}, curso 2020-21}
+
+\maketitle
+
+%\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ 
+%
+\begin{center}
+	\fbox{UNIVERSIDAD DE CÁDIZ}
+\end{center}
+
+%\qquad
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1.5cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{1cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de pÃÂ¡gina
+{2cm}                           % espacio entre el texto y el pie de pÃÂ¡gina
+
+
+
+
+
+%\begin{center}
+%	\rule{135mm}{0.3mm}
+%\end{center}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1.5cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{1cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de pÃÂ¡gina
+{2cm}                           % espacio entre el texto y el pie de pÃÂ¡gina
+
+
+%\newpage
+
+% Índice de la práctica.
+%\tableofcontents{}
+
+
+
+
+%------------------------EJERCICIO 1-----------------------------
+
+%\newpage
+
+%\section{Primer ejercicio}
+
+%\subsection*{Enunciado}
+
+
+
+%Calcula la solución aproximada del problema de contorno
+%
+%$$ u_{t}+\frac{1}{3}u_{x}=0,\;\;\;\; (x,t) \in [2,4]×[0,2],$$
+%$$ u(x,0)=\cos{(\pi x)},\;\;\;\; x \in [2,4],$$
+%$$ u(4,t)=1,\;\;\;\; t \in [0,2],$$
+%
+%por un esquema lateral derecho, tomando 11 puntos en total en el eje %X y 21 puntos en el eje Y. Por último, representa la solución %obtenida.
+
+%\
+
+%\subsection*{Resolución}
+%
+%Ver en el fichero \textit{Mathematica} adjunto.
+
+
+
+
+
+
+%------------------------EJERCICIO 2---------------------------
+
+%\newpage
+
+\
+
+%\begin{center}
+\section*{Resumen}
+%\end{center}
+
+En gran parte de las ecuaciones en derivadas parciales (EDPs) no es posible obtener una solución exacta, debido a su complejidad. Es por ello que, frecuentemente, se recurre a métodos numéricos que nos permiten obtener soluciones aproximadas y bastante acertadas, en comparación con la exacta. Es el caso del \textbf{método en diferencias finitas}, mediante el cual obtenemos esquemas numéricos y soluciones discretas. \\
+
+
+En nuestro caso, aplicaremos el método de las diferencias finitas a la \textbf{ecuación del transporte}, la cual viene dada por:
+
+$$
+\left\{
+u_t+p u_x = 0\atop
+u(x,0) = f(x)
+\right.
+$$
+\\
+con $p \in \mathbb{R}$ y $f(x)$ la condición inicial. \\
+
+Así pues, realizaremos discretizaciones uniformes (tamaños de paso fijos) en tiempo y en espacio para unos ciertos intervalos (obteniendo una malla cuadrangular de nodos), y hallaremos soluciones numéricas mediante \textbf{4 esquemas numéricos} distintos (progresivo o regresivo en tiempo $t$, y progresivo o regresivo en espacio $x$). Todo ello lo programamos mediante \textit{\textbf{Python}} y \textbf{bases de datos}, creando finalmente un programa que pida los datos iniciales de la ecuación del transporte a resolver y que, posteriormente, calcule los puntos solución de la solución numérica. \newpage
+
+El \textbf{programa} realizado tiene dos módulos:
+\begin{itemize}
+	\item \textbf{Módulo de entrada/salida}: utilizamos la instrucción input y la conversión de tipos de datos para validar los que van a entrar en base de datos. La base de datos es \textit{SQLite}, y hemos creado un módulo para incluir de forma abstracta cualquier tipo de datos en cualquier tabla, siempre y cuando estén validados.
+	\item \textbf{Módulo de cálculo}: creamos clases generales de ecuación y clases específicas para cada tipo de ecuación, y usando el patrón de diseño factoría apuntamos al esquema concreto de ecuación del transporte usando como discriminante la progresión o regresión en tiempo y espacio. En un principio lo diseñamos con herencia, pero decidimos separarlo en clases independientes para favorecer la independencia de responsabilidades en cada clase, pero hemos dejado incluido un ejemplo de herencia con clases de ecuación lineal y de segundo grado por cuestiones didácticas.
+\end{itemize}
+
+
+\section*{Instalación}
+
+El programa se instala con el comando \texttt{python install.py}.
+
+\section*{Ejecución}
+
+\begin{itemize}
+	\item \texttt{python introducir\_edp.py}: el programa nos solicitará los datos y guardará en base de datos una vez terminadas las solicitudes.
+	\item \texttt{python resolver\_edp.py}: el programa nos solicitará el identificador de la ecuación y mostrará por pantalla los puntos solución, que también actualizará en la base de datos.
+\end{itemize}
+
+\section*{Ejemplo}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{ejemplo1}
+  \caption{Ejecución del programa para introducir datos}
+  \label{fig:ejemplo1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{ejemplo2}
+  \caption{Ejecución del programa para resolver EDPs}
+  \label{fig:ejemplo2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{grafico}
+  \caption{Resultado gráfico de la ejecución}
+  \label{fig:grafico}
+\end{figure}
+
+
+
+\end{document}
+
+
