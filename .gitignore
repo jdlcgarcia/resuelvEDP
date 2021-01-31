@@ -131,3 +131,5 @@ dmypy.json
 /demo.db
 
 .DS_Store
+
+*.png

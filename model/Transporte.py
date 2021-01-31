@@ -3,6 +3,9 @@ from sympy import *
 import numpy as np
 from model.DB import DB
 import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
+
 
 class Transporte:
     def __init__(self):
@@ -56,15 +59,15 @@ class Transporte:
         return ecuacion
 
     def inicializar_matriz(self):
-        for i in range(self.m+1):
-            for j in range(self.n+1):
+        for i in range(self.m + 1):
+            for j in range(self.n + 1):
                 self.matriz[i, j] = None
         self.matriz[0, 0] = 0
 
     def imprimir_matriz(self):
         for j in range(self.n, -1, -1):
             print(j, end=') ')
-            for i in range(self.m+1):
+            for i in range(self.m + 1):
                 print(self.matriz[i, j], end=' ')
             print('')
 
@@ -76,7 +79,7 @@ class Transporte:
     def extraer_puntos_solucion(self):
         solucion = []
         for j in range(self.n + 1):
-            for i in range(self.m+1):
+            for i in range(self.m + 1):
                 coordenada = self.punto_solucion_por_coordenada(i, j)
                 solucion.append(coordenada)
         return solucion
@@ -228,5 +231,8 @@ class Transporte:
             y.append(i['t'])
             z.append(i['solucion'])
 
-        ax.plot(x, y, z)
+        surf = ax.plot_trisurf(x, y, z, cmap=cm.jet, linewidth=0.1)
+        fig.colorbar(surf, shrink=0.5, aspect=5)
         plt.show()
+        plt.draw()
+        fig.savefig('grafico'+str(self.id)+'.png', dpi=100)
